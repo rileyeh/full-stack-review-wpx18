@@ -20,7 +20,7 @@ module.exports = {
 
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(password, salt)
-            console.log(hash)
+
             let response = await db.auth.create_user({ name, email, hash, admin, id })
             let newUser = response[0]
     
@@ -66,5 +66,13 @@ module.exports = {
     logout: (req, res) => {
         req.session.destroy()
         res.sendStatus(200)
+    },
+    getUser: (req, res) => {
+        try {
+            res.status(200).send(req.session.user)
+        } catch (error) {
+            console.log('cannot get user', error)
+            res.status(500).send('no user')
+        }
     }
 }

@@ -5,6 +5,8 @@ const app = express()
 require('dotenv').config()
 
 const authCtrl = require('./controllers/authCtrl')
+const ticketCtrl = require('./controllers/ticketCtrl')
+const {adminOnly} = require('./middleware/adminOnly')
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
 
@@ -30,5 +32,15 @@ app.use(session({
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 app.delete('/auth/logout', authCtrl.logout)
+app.get('/auth/current', authCtrl.getUser)
+
+//TICKETS - AUTH//
+app.get('/api/tickets', adminOnly, ticketCtrl.getTicketsByAdmin)
+app.post('/api/tickets', adminOnly, ticketCtrl.createTicket)
+app.delete('/api/tickets/:id', adminOnly, ticketCtrl.deleteTicket)
+
+//TICKETS//
+app.get('/api/tickets/employee', ticketCtrl.getTicketsByEmployee)
+app.put('/api/tickets/:id', ticketCtrl.updateTicket)
 
 app.listen(SERVER_PORT, () => console.log(`listening on ${SERVER_PORT}`))
