@@ -57,5 +57,16 @@ module.exports = {
             console.log('error updating tix - employee', error)
             res.status(500).send(error)
         }
+    },
+    getEmployeesByAdmin: async (req, res, next) => {
+        try {
+            const db = req.app.get('db')
+            const {user_id, company_id} = req.session.user
+            const employees = await db.tickets.get_employees_by_admin({user_id, company_id})
+            res.status(200).send(employees)
+        } catch (error) {
+            console.log('error getting employees', error)
+            res.status(500).send(error)
+        }
     }
 }

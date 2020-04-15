@@ -38,6 +38,7 @@ app.get('/auth/current', authCtrl.getUser)
 app.get('/api/tickets', adminOnly, ticketCtrl.getTicketsByAdmin)
 app.post('/api/tickets', adminOnly, ticketCtrl.createTicket)
 app.delete('/api/tickets/:id', adminOnly, ticketCtrl.deleteTicket)
+app.get('/api/employees', adminOnly, ticketCtrl.getEmployeesByAdmin)
 
 //TICKETS//
 app.get('/api/tickets/employee', ticketCtrl.getTicketsByEmployee)
