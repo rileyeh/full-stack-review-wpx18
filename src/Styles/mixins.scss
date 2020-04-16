@@ -1,0 +1,20 @@
+@mixin flex-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@mixin black-button {
+    height: 30px;
+    color: $white;
+    padding: 0 10px;
+    background-color: $black;
+    font-size: 18px;
+    border: none;
+
+    &:hover {
+        border: 2px solid lightcoral;
+        color: lightcoral;
+    }
+}

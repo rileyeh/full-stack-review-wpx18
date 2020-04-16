@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.scss'
 import {Route, Switch} from 'react-router-dom'
 import Header from './Components/Header/Header'
 import Auth from './Components/Auth/Auth'
@@ -7,7 +8,7 @@ import Form from './Components/Form/Form'
 
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <Header/>
       <Switch>
         <Route path='/form' component={Form}/>

@@ -1,0 +1,64 @@
+@import '../../Styles/colors.scss', '../../Styles/mixins.scss';
+
+.dash-main {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    position: relative;
+
+    button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        @include black-button;
+    }
+
+    div {
+        @include flex-box;
+        padding: 15px;
+
+        .link {
+            color: lightcoral;
+            text-decoration: none;
+            margin-left: 20px;
+
+            &:hover {
+                color: $black;
+            }
+        }
+    }
+
+    section {
+        width: 100vw;
+        @include flex-box;
+    }
+}
+
+.card {
+    background-color: $gray;
+    height: 200px;
+    width: 300px;
+    flex-direction: column;
+
+    h2 {
+        font-weight: bold;
+    }
+
+    button {
+        position: relative;
+    }
+
+    p {
+        width: 100%;
+    }
+}
+
+@media (max-width: 675px) {
+    .dash-admin {
+        @include flex-box;
+        flex-direction: column;
+        
+        p {
+            margin: 20px 0;
+        }
+    }
+}

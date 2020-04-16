@@ -1,0 +1,41 @@
+@import '../../Styles/colors.scss', '../../Styles/mixins.scss';
+
+.auth-main {
+    height: calc(100vh - 80px);
+    width: 100vw;
+    @include flex-box;
+}
+
+.auth-container {
+    @include flex-box;
+    flex-direction: column;
+
+    button {
+        @include black-button;
+    }
+}
+
+.auth-form {
+    @include flex-box;
+    flex-direction: column;
+    width: 300px;
+    height: 500px;
+
+    input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid $black;
+    }
+
+    span {
+        width: 100%;
+        display: flex;
+        position: relative;
+
+        label {
+            position: absolute;
+            left: 25px;
+        }
+    }
+}

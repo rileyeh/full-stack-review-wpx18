@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import {connect} from 'react-redux'
+import {register} from '../../Redux/reducers/user'
 
 class Register extends Component {
     constructor(props) {
@@ -14,9 +15,9 @@ class Register extends Component {
         }
     }
 
-    register = e => {
+    handleRegister = e => {
         e.preventDefault()
-        axios.post('/auth/register', this.state)
+        this.props.register(this.state)
             .then(() => {
                 this.props.redirect()
             })
@@ -41,22 +42,26 @@ class Register extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.register}>
-                <input 
-                    type='checkbox'
-                    onChange={this.handleClick}
-                    name='employee'
-                    checked={!this.state.admin}
-                    id='employee'/>
-                <label htmlFor='employee'>employee</label>
-                <input 
-                    type='checkbox'
-                    onChange={this.handleClick}
-                    name='admin'
-                    checked={this.state.admin}
-                    id='admin'/>
-                <label htmlFor='admin'>admin</label>
+            <div className='auth-container'>
+                <form  onSubmit={this.handleRegister} className='auth-form'>
+                <span>
+                    <input 
+                        type='checkbox'
+                        onChange={this.handleClick}
+                        name='employee'
+                        checked={!this.state.admin}
+                        id='employee'/>
+                    <label htmlFor='employee'>employee</label>
+                </span>
+                <span>
+                    <input 
+                        type='checkbox'
+                        onChange={this.handleClick}
+                        name='admin'
+                        checked={this.state.admin}
+                        id='admin'/>
+                    <label htmlFor='admin'>admin</label>
+                </span>
                 <input
                     type='text'
                     value={this.state.name}
@@ -84,10 +89,10 @@ class Register extends Component {
                     hidden={this.state.admin}/>
                 <button>register</button>
                 </form>
-                <button onClick={this.props.toggle}>already have an account? go to login</button>
+                <button onClick={this.props.toggle}>need to login?</button>
             </div>
         )
     }
 }
 
-export default Register
+export default connect(null, {register})(Register)

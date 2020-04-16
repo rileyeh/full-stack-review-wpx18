@@ -1,0 +1,15 @@
+@import '../../Styles/colors.scss', '../../Styles/mixins.scss';
+
+.header-main {
+    width: 100vw;
+    height: 80px;
+    background-color: $black;
+    color: $white;
+    @include flex-box;
+    position: relative;
+
+    h2 {
+        position: absolute;
+        left: 15px;
+    }
+}

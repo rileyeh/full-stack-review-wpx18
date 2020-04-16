@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Card from './Card'
 import {Link, Redirect} from 'react-router-dom'
+import './Dash.scss'
+import {connect} from 'react-redux'
+import {logout} from '../../Redux/reducers/user'
 
 class Dash extends Component {
     constructor(props) {
@@ -63,8 +66,8 @@ class Dash extends Component {
             })
     }
 
-    logout = () => {
-        axios.delete('/auth/logout')
+    handleLogout = () => {
+        this.props.logout()
             .then(({data}) => {
                 this.setState({
                     user: data,
@@ -89,7 +92,8 @@ class Dash extends Component {
     }
 
     render() {
-        let {user, redirect} = this.state
+        let {redirect} = this.state
+        let {user} = this.props
 
         if (redirect) {
             return <Redirect to='/'/>
@@ -104,17 +108,33 @@ class Dash extends Component {
                 deleteTicket={this.deleteTicket}/>)
 
         return (
-            <div>   
-                <h2>dash</h2>
-                <button onClick={this.logout}>logout</button>
-                {user.is_admin && <div>
-                    <Link to='/form'>add ticket</Link>
-                    <p>Company ID: {user.company_id}</p>
-                    </div>}
-                {mappedTickets}
-            </div>
+            <>
+                {
+                    user && <div className='dash-main'>
+                        <div>
+                            <button onClick={this.handleLogout}>logout</button>
+                            {user.is_admin && (
+                                <div className='dash-admin'>
+                                    <p>Company ID: {user.company_id}</p>
+                                    <Link to='/form' className='link'>add ticket</Link>
+                                </div>
+                            )}
+                        </div>
+                        <section>
+                            {mappedTickets}
+                        </section>
+                    </div>
+                }
+            </>
         )
     }
 }
 
-export default Dash
+const mapStateToProps = state => {
+    let {data: user} = state.user
+    return {user}
+}
+
+const mapDispatchToProps = {logout}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dash)

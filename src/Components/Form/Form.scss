@@ -1,0 +1,29 @@
+@import '../../Styles/colors.scss', '../../Styles/mixins.scss';
+
+.form-main {
+    width: 80vw;
+    height: 500px;
+    margin-top: 40px;
+    @include flex-box;
+
+    form {
+        @include flex-box;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        background-color: $gray;
+
+        span {
+            width: 35vw;
+            @include flex-box;
+            
+            input, select {
+                width: 250px;
+            }
+        }
+
+        button {
+            @include black-button;
+        }
+    }
+}

@@ -9,7 +9,7 @@ const Card = ({ticket, user, checkBox, deleteTicket}) => {
             {
                 admin
                 ? 
-                <div style={style}>
+                <div className='card'>
                     <h2>{title}</h2>
                     <p>{description}</p>
                     <p>{name}</p>
@@ -17,11 +17,13 @@ const Card = ({ticket, user, checkBox, deleteTicket}) => {
                     <button onClick={() => deleteTicket(ticket_id)}>delete</button>
                 </div>
                 :
-                <div style={style}>
+                <div className='card'>
                     <h2>{title}</h2>
                     <p>{description}</p>
-                    <input type='checkbox' id='box' checked={complete} onChange={() => checkBox(ticket_id)}/>
-                    <label htmlFor='box'>complete</label>
+                    <span>
+                        <input type='checkbox' id='box' checked={complete} onChange={() => checkBox(ticket_id)}/>
+                        <label htmlFor='box'>complete</label>
+                    </span>
                 </div>
             }
         </div>
@@ -30,8 +32,8 @@ const Card = ({ticket, user, checkBox, deleteTicket}) => {
 
 export default Card
 
-const style = {
-    border: '2px solid black',
-    width: 200,
-    margin: 20
-}
+// const style = {
+//     border: '2px solid black',
+//     width: 200,
+//     margin: 20
+// }

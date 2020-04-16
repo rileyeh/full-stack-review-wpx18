@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './Form.scss'
 
 class Form extends Component {
     constructor(props) {
@@ -54,31 +55,37 @@ class Form extends Component {
             )
         })
         return (
-            <div>
+            <div className='form-main'>
                 <form onSubmit={this.createTicket}>
-                    <label>title: </label>
-                    <input 
-                        type='text'
-                        onChange={this.handleChange}
-                        name='title'
-                        value={this.state.title}
-                        placeholder='title'/>
-                    <label htmlFor='select'>employee: </label>
-                    <select
-                        onChange={this.handleChange}
-                        name='selected'
-                        id='select'
-                        value={this.state.selected}>
-                        <option>select...</option>
-                        {mappedEmployees}
-                    </select>
-                    <label>description: </label>
-                    <input 
-                        type='text'
-                        onChange={this.handleChange}
-                        name='description'
-                        value={this.state.description}
-                        placeholder='description'/>
+                    <span>
+                        <label>title: </label>
+                        <input 
+                            type='text'
+                            onChange={this.handleChange}
+                            name='title'
+                            value={this.state.title}
+                            placeholder='title'/>
+                    </span>
+                    <span>
+                        <label htmlFor='select'>employee: </label>
+                        <select
+                            onChange={this.handleChange}
+                            name='selected'
+                            id='select'
+                            value={this.state.selected}>
+                            <option>select...</option>
+                            {mappedEmployees}
+                        </select>
+                    </span>
+                    <span>
+                        <label>description: </label>
+                        <input 
+                            type='text'
+                            onChange={this.handleChange}
+                            name='description'
+                            value={this.state.description}
+                            placeholder='description'/>
+                    </span>
                     <button>save</button>
                 </form>
             </div>

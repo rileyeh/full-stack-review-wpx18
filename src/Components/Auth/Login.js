@@ -1,5 +1,6 @@
 import React, { Component } from 'react' 
-import axios from 'axios'
+import {connect} from 'react-redux'
+import {login} from '../../Redux/reducers/user'
 
 class Login extends Component {
     constructor(props) {
@@ -11,9 +12,9 @@ class Login extends Component {
         }
     }
 
-    login = e => {
+    handleLogin = e => {
         e.preventDefault()
-        axios.post('/auth/login', this.state)
+        this.props.login(this.state)
             .then(() => {
                 this.props.redirect()
             })
@@ -31,8 +32,8 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.login}>
+            <div className='auth-container'>
+                <form onSubmit={this.handleLogin} className='auth-form'>
                     <input
                         type='text'
                         value={this.state.email}
@@ -53,4 +54,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default connect(null, {login})(Login)
